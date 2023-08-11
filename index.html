@@ -13,9 +13,8 @@
     <body>
       <div class="container">
         <h1>Lista de Tarefas</h1>
-        <!-- Título da página -->
         <form id="task-form">
-          <!-- Campos para inserção dos detalhes da tarefa -->
+          <!-- campos dos atributos da tarefa -->
           <input type="text" id="descricao" placeholder="Descrição" required />
           <input type="text" id="autor" placeholder="Autor" required />
           <input
@@ -30,13 +29,13 @@
             placeholder="Importância"
             required
           />
-          <input type="text" id="valor" placeholder="Valor (opcional)" />
-          <input type="text" id="duracao" placeholder="Duração (opcional)" />
+          <input type="text" id="valor" placeholder="Valor de pagamento (opcional)" />
+          <input type="text" id="duracao" placeholder="Duracao da tarefa (opcional)" />
+          <!-- botão para adicionar tarefa -->
           <button type="submit">Adicionar Tarefa</button>
-          <!-- Botão para adicionar tarefa -->
         </form>
+        <!-- lista de tarefas a serem exibidas -->
         <ul id="task-list"></ul>
-        <!-- Lista de tarefas a serem exibidas -->
         <button id="list-by-importance">Listar por Importância</button>
       </div>
     </body>
