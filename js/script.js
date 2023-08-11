@@ -1,13 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const taskForm = document.getElementById("task-form"); // Obtém o formulário
-    const tasksDiv = document.getElementById("task-list"); // Obtém a <div> onde as tarefas serão exibidas
-    const listByImportanceButton = document.getElementById("list-by-importance"); // Botão "Listar por Importância"
-    const tasks = []; // Array para armazenar as tarefas
-
+    const taskForm = document.getElementById("task-form"); // pega o formulário
+    const tasksDiv = document.getElementById("task-list"); // pega as tarefas que serão exibidas
+    const listByImportanceButton = document.getElementById("list-by-importance"); // botão "Listar por Importância"
+    const tasks = []; 
     taskForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // Impede o comportamento padrão de envio do formulário
+        event.preventDefault(); // interrompe o padrao do form
 
-        // Obtém os valores dos campos de entrada do formulário
+        // pega os valores dos campos de entrada do formulário
         const descricao = document.getElementById("descricao").value;
         const autor = document.getElementById("autor").value;
         const departamento = document.getElementById("departamento").value;
@@ -15,66 +14,66 @@ document.addEventListener("DOMContentLoaded", function () {
         const valor = document.getElementById("valor").value;
         const duracao = document.getElementById("duracao").value;
 
-        // Cria um novo objeto para representar a tarefa
+        // criar obj
         const novaTarefa = {
             descricao,
             autor,
             departamento,
             importancia,
-            valor: valor || null, // Define o valor ou null se não fornecido
-            duracao: duracao || null // Define a duração ou null se não fornecida
+            valor: valor || null, // define como null caso nao tiver valor
+            duracao: duracao || null // define como null caso nao tiver valor
         };
 
-        // Adiciona a nova tarefa ao array de tarefas
+        // add a nova tarefa no array de tarefas
         tasks.push(novaTarefa);
 
-        // Chama a função para exibir as tarefas atualizadas
+        // chama a função para exibir a lista de tarefas atualizadas
         exibirTarefas();
 
-        // Limpa os campos do formulário
+        // limpa os campos do formulário
         taskForm.reset();
     });
 
     listByImportanceButton.addEventListener("click", function () {
-        // Ordena as tarefas por importância e exibe apenas as descrições
+        // ordena por importancia
         const tarefasOrdenadas = tasks.slice().sort((a, b) => b.importancia - a.importancia);
         const descricaoTarefasOrdenadas = tarefasOrdenadas.map(tarefa => tarefa.descricao);
         alert("Lista de Tarefas por Importância:\n" + descricaoTarefasOrdenadas.join("\n"));
     });
 
     function exibirTarefas() {
-        // Limpa o conteúdo anterior da div de exibição das tarefas
+        // limpa o conteúdo anterior da div de exibição das tarefas
         tasksDiv.innerHTML = "";
 
-        // Itera sobre o array de tarefas e cria elementos HTML para cada tarefa
+        // passa pelo array de tarefas e add cada tarefa no html
         tasks.forEach(function (tarefa, index) {
-            const tarefaDiv = document.createElement("div"); // Cria um novo elemento <div> para a tarefa
-            tarefaDiv.className = "tarefa"; // Define a classe CSS para estilização
+            const tarefaDiv = document.createElement("div"); // cria div para tarefa
+            tarefaDiv.className = "tarefa"; // add class 
 
-            // Cria um elemento <span> para exibir a descrição da tarefa
+            // cria um span para mostrar a descricao da tarefa
             const descricaoSpan = document.createElement("span");
             descricaoSpan.innerText = tarefa.descricao;
 
-            // Cria um botão "Excluir" para remover a tarefa
+            // cria botao de excluir
             const excluirButton = document.createElement("button");
             excluirButton.innerText = "Excluir";
-            excluirButton.className = "excluir"; // Define a classe CSS para estilização
+            excluirButton.className = "excluir"; // add class
             excluirButton.addEventListener("click", function () {
-                // Remove a tarefa do array quando o botão "Excluir" é clicado
+                // exclui ao clicar no botao
                 tasks.splice(index, 1);
-                // Chama a função para exibir as tarefas atualizadas
+                // exibir as tarefas atualizadas
                 exibirTarefas();
             });
 
-            // Adiciona os elementos criados à div da tarefa
+            // add os elementos criados a div da tarefa
             tarefaDiv.appendChild(descricaoSpan);
             tarefaDiv.appendChild(excluirButton);
 
-            // Adiciona a div da tarefa à div de exibição das tarefas
+            // add a div da tarefa a div de exibir das tarefas
             tasksDiv.appendChild(tarefaDiv);
         });
 
-        // Itera sobre as tarefas exibidas e adiciona um ouvinte de clique
+        // pega as tarefas exibidas e adiciona um clique
         tasksDiv.querySelectorAll(".tarefa").forEach(function (tarefaDiv, index) {
             tarefaDiv.addEventListener("click", function () {
                 exibirDetalhesTarefa(index);
@@ -95,6 +94,6 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(detalhes);
     }
 
-    // Chama a função para exibir as tarefas inicialmente
+    // exibir as tarefas inicialmente
     exibirTarefas();
 });
